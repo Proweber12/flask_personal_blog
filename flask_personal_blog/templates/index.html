@@ -12,15 +12,20 @@
 	<!-- Nav -->
 	<nav id="nav">
 		<ul class="container">
-			<li><a href="#about-us">Обо мне</a></li>
-			<li><a href="#posts">Посты</a></li>
-			<li><a href="#portfolio">Portfolio</a></li>
-			<li><a href="#contact">Contact</a></li>
+			<li><a href="#">Главная</a></li>
+			{% if current_user.is_authenticated %}
+			<li><a href="{{ url_for('userapp.profile') }}">Профиль</a></li>
+			<li><a href="{{ url_for('userapp.logout') }}">Выйти</a></li>
+			{% else %}
+			<li><a href="{{ url_for('userapp.register') }}">Регистрация</a></li>
+			<li><a href="{{ url_for('userapp.login') }}">Войти</a></li>
+			{% endif %}
+
 		</ul>
 	</nav>
 
 	<!-- Home -->
-	<article id="about-us" class="wrapper style1">
+	<article id="about-me" class="wrapper style1">
 		<div class="container">
 			<div class="row">
 				<div class="col-4 col-5-large col-12-medium">
@@ -249,12 +254,12 @@
 	</article>
 
 	<!-- Scripts -->
-	<script src="{{ url_for('static', filename="assets/js/jquery.min.js") }}"></script>
-	<script src="{{ url_for('static', filename="assets/js/jquery.scrolly.min.js") }}"></script>
-	<script src="{{ url_for('static', filename="assets/js/browser.min.js") }}"></script>
-	<script src="{{ url_for('static', filename="assets/js/breakpoints.min.js") }}"></script>
-	<script src="{{ url_for('static', filename="assets/js/util.js") }}"></script>
-	<script src="{{ url_for('static', filename="assets/js/main.js") }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/jquery.scrolly.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
 </body>
 
 </html>

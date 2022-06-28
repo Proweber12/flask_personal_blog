@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ title }}</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}"/>
+</head>
+
+<body>
+
+<nav id="nav">
+    <ul class="container">
+        <li><a href="{{ url_for('mainapp.home') }}">Главная</a></li>
+        {% if current_user.is_authenticated %}
+        <li><a href="{{ url_for('userapp.profile') }}">Профиль</a></li>
+        <li><a href="{{ url_for('userapp.logout') }}">Выйти</a></li>
+        {% else %}
+        <li><a href="#">Регистрация</a></li>
+        <li><a href="{{ url_for('userapp.login') }}">Войти</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+<article id="contact" class="wrapper style4">
+    <div class="container medium">
+        <header>
+            <h2>Регистрация</h2>
+        </header>
+        <div class="row">
+            <div class="col-12">
+                <form method="post" action="#">
+                    {{ form.hidden_tag() }}
+                    <div class="row">
+                        <div class="col-6 col-12-small">
+                            {{ form.username.label }}
+
+                            {% if form.username.errors %}
+                            {{ form.username }}
+                            <div class="invalid-feedback">
+                                {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.username(type="text", id="username", placeholder="Username") }}
+                            {% endif %}
+                        </div>
+                        <div class="col-6 col-12-small">
+                            {{ form.email.label }}
+
+                            {% if form.email.errors %}
+                            {{ form.email }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.email(type="email", id="email", placeholder="Email") }}
+                            {% endif %}
+                        </div>
+                        <div class="col-6 col-12-small">
+                            {{ form.password.label }}
+
+                            {% if form.password.errors %}
+                            {{ form.password }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.password(type="password", id="password", placeholder="Password") }}
+                            {% endif %}
+                        </div>
+                        <div class="col-6 col-12-small">
+                            {{ form.confirm_password.label }}
+
+                            {% if form.confirm_password.errors %}
+                            {{ form.confirm_password }}
+                            <div class="invalid-feedback">
+                                {% for error in form.confirm_password.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.confirm_password(type="password", id="confirm_password", placeholder="Confirm password") }}
+                            {% endif %}
+                        </div>
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li> {{ form.submit(type="submit", value="Зарегистрироваться") }} </li>
+                                <li>
+                                    <input type="reset" value="Очистить форму" class="alt"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-12">
+                <hr/>
+                <h3>Ищи меня в ...</h3>
+                <ul class="social">
+                    <li>
+                        <a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+                    </li>
+                    <li>
+                        <a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+                    </li>
+                    <!-- <li>
+                        <a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+                    </li>
+                    <li>
+                        <a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a>
+                    </li>
+                    <li>
+                        <a href="#" class="icon brands fa-tumblr"><span class="label">Tumblr</span></a>
+                    </li>
+                    <li>
+                        <a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a>
+                    </li> -->
+                    <li>
+                        <a href="#" class="icon brands fa-github"><span class="label">Github</span></a>
+                    </li>
+
+                    <!-- <li>
+                        <a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a>
+                    </li> -->
+                    <li>
+                        <a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+                    </li>
+                    <!-- <li>
+                        <a href="#" class="icon brands fa-foursquare"><span class="label">Foursquare</span></a>
+                    </li> -->
+                    <li>
+                        <a href="#" class="icon brands fa-skype"><span class="label">Skype</span></a>
+                    </li>
+                    <li>
+                        <a href="#" class="icon brands fa-soundcloud"><span class="label">Soundcloud</span></a>
+                    </li>
+                    <li>
+                        <a href="#" class="icon brands fa-youtube"><span class="label">YouTube</span></a>
+                    </li>
+                    <!-- <li>
+                        <a href="#" class="icon brands fa-blogger"><span class="label">Blogger</span></a>
+                    </li>
+                    <li>
+                        <a href="#" class="icon brands fa-flickr"><span class="label">Flickr</span></a>
+                    </li>
+                    <li>
+                        <a href="#" class="icon brands fa-vimeo"><span class="label">Vimeo</span></a> -->
+                    </li>
+                </ul>
+                <hr/>
+            </div>
+        </div>
+        <footer>
+            <ul id="copyright">
+                <li>&copy; Copyright. All rights reserved.</li>
+            </ul>
+        </footer>
+    </div>
+</article>
+
+</body>
+</html>
