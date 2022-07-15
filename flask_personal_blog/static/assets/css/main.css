@@ -2435,3 +2435,43 @@ input::-moz-focus-inner {
 					}
 
 	}
+
+.form-control-label{
+	color: #111
+}
+
+.post-text {
+	word-break: break-all;
+}
+
+.col-6-medium {
+	width: 100% !important;
+}
+
+.btn-success {
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.btn-outline-success {
+  text-decoration: none;
+}
+
+.mb-1 {
+    text-decoration: none;
+    color: #fff;
+}
+
+.card-footer {
+  display: flex;
+  gap: 10px;
+}
+
+.card-text {
+	word-break: break-all;
+}
+
+.mb-3 {
+	margin-top: 30px;
+}

@@ -14,6 +14,7 @@
 		<ul class="container">
 			<li><a href="#">Главная</a></li>
 			{% if current_user.is_authenticated %}
+			<li><a href="{{ url_for('posts.allpost') }}">Посты</a></li>
 			<li><a href="{{ url_for('userapp.profile') }}">Профиль</a></li>
 			<li><a href="{{ url_for('userapp.logout') }}">Выйти</a></li>
 			{% else %}

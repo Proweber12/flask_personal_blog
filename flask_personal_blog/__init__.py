@@ -1,8 +1,7 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
-from flask_migrate import Migrate
+from flask_login import LoginManager
+from flask_sqlalchemy import SQLAlchemy
 
 from flask_personal_blog.config import Config
 
@@ -20,8 +19,11 @@ def init_app():
 
     from flask_personal_blog.mainapp.views import main
     from flask_personal_blog.userapp.views import users
+    from flask_personal_blog.postapp.views import posts
+
     app.register_blueprint(main)
     app.register_blueprint(users)
+    app.register_blueprint(posts)
 
     db.create_all()
 

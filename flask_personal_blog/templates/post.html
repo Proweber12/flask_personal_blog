@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Flask Blog</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}" />
+</head>
+
+<body class="is-preload">
+	<!-- Nav -->
+	<nav id="nav">
+		<ul class="container">
+			<li><a href="/">Главная</a></li>
+			{% if current_user.is_authenticated %}
+			<li><a href="{{ url_for('posts.allpost') }}">Посты</a></li>
+			<li><a href="{{ url_for('posts.new_post') }}">Создать пост</a></li>
+			<li><a href="{{ url_for('userapp.profile') }}">Профиль</a></li>
+			<li><a href="{{ url_for('userapp.logout') }}">Выйти</a></li>
+			{% else %}
+			<li><a href="{{ url_for('userapp.register') }}">Регистрация</a></li>
+			<li><a href="{{ url_for('userapp.login') }}">Войти</a></li>
+			{% endif %}
+
+		</ul>
+	</nav>
+
+	<!-- posts -->
+	<div class="container" style="display: flex;">
+	  <article class="media" style="display: flex; flex-direction: column;">
+		<img class="rounded-circle article-img" style="margin-right: 5px;" src="{{ url_for('static', filename='static/images/' + post.author.image_file) }}">
+		<a class="mr-2" href="{{ url_for('userapp.user_posts', username=post.author.username) }}" style="margin: 0 auto">{{ post.author.username }}</a>
+	  </article>
+
+	  <div class="card" style="margin-bottom: 20px;">
+		<div class="card-body">
+		  <h4 class="card-title">{{ post.title }}</h4>
+		  <small>Опубликовано {{ post.date_posted.strftime('%A, %d %B %Y %I:%M %p') }}</small>
+		  <br>
+		  <br>
+		  <p class="card-text">{{ post.content }}</p>
+		</div>
+		<div class="card-footer" style="font-size: 20px;">
+		  {% if post.author == current_user %}
+			<div class="card-footer" style="font-size: 20px;"> {% if post.author == current_user %}
+			<button><a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{url_for('posts.update_post', post_id=post.id) }}">Обновить</a></button>
+			<form action="{{ url_for('posts.delete_post', post_id=post.id) }}" method="POST">
+				<input class="btn btn-danger" type="submit" value="Удалить">
+          	</form>
+
+		  {% endif %}
+	</div>
+
+
+		  {% endif %}
+		</div>
+	  </div>
+	</div>
+
+	<!-- Contact -->
+	<article id="contact" class="wrapper style4">
+		<div class="container medium">
+			<div class="row">
+				<div class="col-12">
+					<hr />
+					<h3>Ищи меня в ...</h3>
+					<ul class="social">
+						<li>
+							<a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<!-- <li>
+							<a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-tumblr"><span class="label">Tumblr</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a>
+						</li> -->
+						<li>
+							<a href="#" class="icon brands fa-github"><span class="label">Github</span></a>
+						</li>
+
+						<!-- <li>
+							<a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a>
+						</li> -->
+						<li>
+							<a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<!-- <li>
+							<a href="#" class="icon brands fa-foursquare"><span class="label">Foursquare</span></a>
+						</li> -->
+						<li>
+							<a href="#" class="icon brands fa-skype"><span class="label">Skype</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-soundcloud"><span class="label">Soundcloud</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-youtube"><span class="label">YouTube</span></a>
+						</li>
+						<!-- <li>
+							<a href="#" class="icon brands fa-blogger"><span class="label">Blogger</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-flickr"><span class="label">Flickr</span></a>
+						</li>
+						<li>
+							<a href="#" class="icon brands fa-vimeo"><span class="label">Vimeo</span></a> -->
+						</li>
+					</ul>
+					<hr />
+				</div>
+			</div>
+			<footer>
+				<ul id="copyright">
+					<li>&copy; Copyright. All rights reserved.</li>
+				</ul>
+			</footer>
+		</div>
+	</article>
+
+	<!-- Scripts -->
+	<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/jquery.scrolly.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+</body>
+
+</html>
