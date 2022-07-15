@@ -13,7 +13,7 @@
     <ul class="container">
         <li><a href="{{ url_for('mainapp.home') }}">Главная</a></li>
         {% if current_user.is_authenticated %}
-        <li><a href="{{ url_for('postapp.allpost') }}">Посты</a></li>
+        <li><a href="{{ url_for('posts.allpost') }}">Посты</a></li>
         <li><a href="#">Профиль</a></li>
         <li><a href="{{ url_for('userapp.logout') }}">Выйти</a></li>
         {% else %}

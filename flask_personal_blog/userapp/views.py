@@ -18,7 +18,7 @@ users = Blueprint("userapp", __name__)
 @users.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for("postapp.allpost"))
+        return redirect(url_for("posts.allpost"))
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
@@ -26,15 +26,15 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash("Ваша учетная запись была создана!" " Теперь вы можете войти в систему", "success")
-        next_page = request.args.get('next')
-        return redirect(next_page) if next_page else redirect(url_for('postapp.allpost'))
+        next_page = request.args.get("next")
+        return redirect(url_for("userapp.login"))
     return render_template("register.html", title="Регистрация", form=form)
 
 
 @users.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for("postapp.allpost"))
+        return redirect(url_for("posts.allpost"))
 
     form = LoginForm()
     if form.validate_on_submit():
@@ -42,8 +42,8 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
 
-            next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('postapp.allpost'))
+            next_page = request.args.get("next")
+            return redirect(next_page) if next_page else redirect(url_for("posts.allpost"))
         else:
             flash("Войти не удалось. Пожалуйста, " "проверьте электронную почту и пароль", "внимание")
     return render_template("login.html", title="Аутентификация", form=form)
@@ -80,9 +80,7 @@ def logout():
 
 @users.route("/user/<string:username>")
 def user_posts(username):
-    page = request.args.get('page', 1, type=int)
+    page = request.args.get("page", 1, type=int)
     user = User.query.filter_by(username=username).first_or_404()
-    posts = Post.query.filter_by(author=user)\
-        .order_by(Post.date_posted.desc())\
-        .paginate(page=page, per_page=5)
-    return render_template('user_posts.html', posts=posts, user=user)
+    posts = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+    return render_template("user_posts.html", posts=posts, user=user)
