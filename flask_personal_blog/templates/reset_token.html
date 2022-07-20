@@ -13,62 +13,56 @@
     <ul class="container">
         <li><a href="{{ url_for('mainapp.home') }}">Главная</a></li>
         {% if current_user.is_authenticated %}
-        <li><a href="{{ url_for('userapp.profile') }}">Профиль</a></li>
+        <li><a href="{{ url_for('posts.allpost') }}">Посты</a></li>
+        <li><a href="#">Профиль</a></li>
         <li><a href="{{ url_for('userapp.logout') }}">Выйти</a></li>
         {% else %}
         <li><a href="{{ url_for('userapp.register') }}">Регистрация</a></li>
-        <li><a href="#">Войти</a></li>
+        <li><a href="{{ url_for('userapp.login') }}">Войти</a></li>
         {% endif %}
     </ul>
 </nav>
 
 <article id="contact" class="wrapper style4">
-    <div class="container medium">
-        <header>
-            <h2>Авторизация</h2>
-        </header>
-        <div class="row">
-            <div class="col-12">
-                <form method="post" action="#">
-                    {{ form.hidden_tag() }}
-                    <div class="row">
-                        <div class="col-6 col-12-small">
-                            {{ form.email.label }}
-
-                            {% if form.email.errors %}
-                            {{ form.email }}
-                            <div class="invalid-feedback">
-                                {% for error in form.email.errors %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+            <header>
+                <h2>Сброс пароля</h2>
+            </header>
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label-white") }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
                                 <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                            {% else %}
-                            {{ form.email(type="email", id="email", placeholder="Email") }}
-                            {% endif %}
+                            {% endfor %}
                         </div>
-                        <div class="col-6 col-12-small">
-                            {{ form.password.label }}
-
-                            {% if form.password.errors %}
-                            {{ form.password }}
-                            <div class="invalid-feedback">
-                                {% for error in form.password.errors %}
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.confirm_password.label(class="form-control-label-white") }}
+                    {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_password.errors %}
                                 <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                            {% else %}
-                            {{ form.password(type="password", id="password", placeholder="Password") }}
-                            {% endif %}
+                            {% endfor %}
                         </div>
-                        <div class="col-12">
-                            <ul class="actions">
-                                <li> {{ form.submit(type="submit", value="Войти") }}</li>
-                                <li><a href="{{ url_for('userapp.reset_request') }}"> Забыли пароль? </a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </form>
+                    {% else %}
+                        {{ form.confirm_password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
             </div>
+        </form>
+    </div>
             <div class="col-12">
                 <hr/>
                 <h3>Ищи меня в ...</h3>

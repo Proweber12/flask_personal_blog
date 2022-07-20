@@ -2475,3 +2475,8 @@ input::-moz-focus-inner {
 .mb-3 {
 	margin-top: 30px;
 }
+
+.content-section {
+  width: 1200px;
+  margin: 0 auto;
+}
