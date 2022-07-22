@@ -2480,3 +2480,7 @@ input::-moz-focus-inner {
   width: 1200px;
   margin: 0 auto;
 }
+
+.article-img {
+  width: 100px;
+}

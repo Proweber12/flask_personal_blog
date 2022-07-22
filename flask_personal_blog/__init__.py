@@ -23,10 +23,12 @@ def init_app(config_class=Config):
     from flask_personal_blog.mainapp.views import main
     from flask_personal_blog.postapp.views import posts
     from flask_personal_blog.userapp.views import users
+    from flask_personal_blog.errors.handlers import errors
 
     app.register_blueprint(main)
     app.register_blueprint(users)
     app.register_blueprint(posts)
+    app.register_blueprint(errors)
 
     db.create_all()
 

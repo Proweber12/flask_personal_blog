@@ -37,6 +37,7 @@
                 {% for post in posts.items %}
 				<div class="col-4 col-6-medium col-12-small">
 					<section class="box style1">
+						<img class="rounded-circle article-img" style="margin-right: 5px;" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
 						<h3><a href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h3>
                         <span>Дата публикации: {{ post.date_posted.strftime('%A, %d %B %Y %I:%M %p') }}</span>
 						<p class="post-text">
