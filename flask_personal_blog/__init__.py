@@ -1,4 +1,6 @@
 from flask import Flask
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
@@ -12,6 +14,11 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 bcrypt = Bcrypt()
 mail = Mail()
+
+from flask_personal_blog.models import User, Post
+admin = Admin(app)
+admin.add_view(ModelView(User, db.session))
+admin.add_view(ModelView(Post, db.session))
 
 
 def init_app(config_class=Config):
